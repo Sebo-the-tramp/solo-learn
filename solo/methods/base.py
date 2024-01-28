@@ -50,6 +50,8 @@ from solo.backbones import (
     vit_tiny,
     wide_resnet28w2,
     wide_resnet28w8,
+    phinet,
+    xinet
 )
 from solo.utils.knn import WeightedKNNClassifier
 from solo.utils.lars import LARS
@@ -93,6 +95,8 @@ class BaseMethod(pl.LightningModule):
         "convnext_large": convnext_large,
         "wide_resnet28w2": wide_resnet28w2,
         "wide_resnet28w8": wide_resnet28w8,
+        "phinet": phinet,
+        "xinet": xinet
     }
     _OPTIMIZERS = {
         "sgd": torch.optim.SGD,
@@ -201,6 +205,11 @@ class BaseMethod(pl.LightningModule):
                     3, 64, kernel_size=3, stride=1, padding=2, bias=False
                 )
                 self.backbone.maxpool = nn.Identity()
+
+        # added code
+        elif self.backbone_name.startswith("phinet"):
+            self.features_dim: int = 100
+        
         else:
             self.features_dim: int = self.backbone.num_features
         ##############################
