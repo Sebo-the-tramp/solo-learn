@@ -46,8 +46,8 @@ auto_resume:
 
 # overwrite PL stuff
 max_epochs: 1000
-devices: [0]
+devices: [2]
 sync_batchnorm: True
-accelerator: "gpu"
+accelerator: "cpu"
 strategy: "ddp"
 precision: 16-mixed

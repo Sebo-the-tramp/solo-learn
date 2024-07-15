@@ -224,6 +224,7 @@ def main(cfg: DictConfig):
             "strategy": DDPStrategy(find_unused_parameters=False)
             if cfg.strategy == "ddp"
             else cfg.strategy,
+            "devices": 1
         }
     )
     trainer = Trainer(**trainer_kwargs)
